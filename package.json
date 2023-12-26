@@ -1,0 +1,15 @@
+{
+  "name": "leading-full-stop",
+  "version": "0.0.0",
+  "description": "Dotfiles and config",
+  "main": "main.js",
+  "type": "module",
+  "repository": "NA",
+  "author": "Joshua D. Graber <joshua.d.graber@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "bin": {
+    "dotfiles": "./main.js"
+  },
+  "keywords": ["dotfiles"]
+}

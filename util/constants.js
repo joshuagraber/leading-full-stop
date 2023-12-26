@@ -1,0 +1,2 @@
+export const LEADING_TAG_SHELL = '### BEGIN BASE DOTFILE CODE ###';
+export const CLOSING_TAG_SHELL = '### END BASE DOTFILE CODE ###';
