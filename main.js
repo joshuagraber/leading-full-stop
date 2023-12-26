@@ -20,7 +20,7 @@ if (!Object.values(DOTFILE_ACTIONS).some((a) => a === action)) {
 }
 
 if (!Object.keys(DOTFILE_DATA).some((t) => t === type)) {
-	logger.error('No valid type passed.\n', );
+	logger.error('No valid type passed.\n');
 	process.exit(1);
 }
 
@@ -31,14 +31,14 @@ const repoFilePath =
 
 switch (action) {
 	case DOTFILE_ACTIONS.APPLY:
-		const repoBase = await manager.get(repoFilePath);
+		const { config: repoBase } = await manager.get(repoFilePath);
 		await manager.set(localFilePath, repoBase);
 		break;
 	case DOTFILE_ACTIONS.CREATE:
 		await manager.create(localFilePath, data);
 		break;
 	case DOTFILE_ACTIONS.RETRIEVE:
-		const localBase = await manager.get(localFilePath);
+		const { config: localBase } = await manager.get(localFilePath);
 		await manager.set(repoFilePath, localBase);
 		break;
 	default:

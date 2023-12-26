@@ -7,10 +7,12 @@ import processFileLineByLine from '../../../util/processFileLineByLine.js';
 /**
  * Returns config between the leading and closing flags
  * @param {string} path path to file
- * @returns {Promise<string[]>} a promise that resolves to an array of strings representing lines of the file
+ * @returns {Promise<Partial<Record<'config' | 'after' | 'before', string[]>>>} a promise that resolves to an object of arrays of strings representing lines of the file and relationship to config
  */
 export default async function get(path) {
 	const allLines = [];
+	const linesAfterFlags = [];
+	const linesBeforeFlags = [];
 	const linesBetweenFlags = [];
 	let hasMetLeadingFlag = false;
 	let hasMetClosingFlag = false;
@@ -27,8 +29,12 @@ export default async function get(path) {
 		);
 
 
-	if (!hasMetLeadingFlag) return allLines;
-	else return linesTrimmed;
+	if (!hasMetLeadingFlag) return { config: allLines };
+	else return { 
+		config: linesTrimmed, 
+		after: linesAfterFlags, 
+		before: linesBeforeFlags
+	};
 
 
 	/**
@@ -37,10 +43,13 @@ export default async function get(path) {
  */
 	function processLines(line) {
 		allLines.push(line);
+		// Order is important, as we want to catch the flags in the "before" and "after" arrays
+		if (!hasMetLeadingFlag) linesBeforeFlags.push(line);
 		if (line === CLOSING_TAG_SHELL) {
 			hasMetClosingFlag = true;
 		}
 		if (hasMetLeadingFlag && !hasMetClosingFlag) linesBetweenFlags.push(line);
 		if (line === LEADING_TAG_SHELL) hasMetLeadingFlag = true;
+		if (hasMetClosingFlag) linesAfterFlags.push(line);
 	}
 }
