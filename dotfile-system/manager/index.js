@@ -3,8 +3,12 @@ import get from './get/index.js';
 import create from './create/index.js';
 
 export const DOTFILE_DATA = {
+	'iTerm': {
+		fileName: 'com.googlecode.iterm2.plist',
+		localDirectory: `${process.env.HOME}/Library/Preferences`
+	},
 	'zsh': {
-		localFileName: '.zshrc',
+		fileName: '.zshrc',
 		localDirectory: process.env.HOME
 	}
 };

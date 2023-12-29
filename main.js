@@ -25,9 +25,9 @@ if (!Object.keys(DOTFILE_DATA).some((t) => t === type)) {
 }
 
 const localFilePath = 
-`${DOTFILE_DATA[type].localDirectory}/${DOTFILE_DATA[type].localFileName}`;
+`${DOTFILE_DATA[type].localDirectory}/${DOTFILE_DATA[type].fileName}`;
 const repoFilePath = 
-	path.join(__dirname, `./dotfiles/${DOTFILE_DATA[type].localFileName}`) ;
+	path.join(__dirname, `./dotfiles/${DOTFILE_DATA[type].fileName}`) ;
 
 switch (action) {
 	case DOTFILE_ACTIONS.APPLY:
