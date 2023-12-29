@@ -79,6 +79,8 @@ alias settings='open -a "System Settings"'
 alias slack='open -a Slack'
 
 ## Git
+alias gcls="npx lint-staged && cz"
+alias gcals="git add -A && npx lint-staged && cz"
 alias gcobn=checkout_by_branch_name_with_npm_install
 alias ccoby=checkout_by_branch_name_with_yarn_install
 alias gcopn=checkout_by_pr_number_with_npm_install
